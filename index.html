@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>簡易收銀計算機</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 400px; margin: 40px auto; padding: 20px; border: 1px solid #ccc; borderRadius: 8px; }
+    .input-group { margin-bottom: 15px; }
+    label { display: block; margin-bottom: 5px; font-weight: bold; }
+    input { width: 100%; padding: 8px; box-sizing: border-box; }
+    button { width: 100%; padding: 10px; background-color: #28a745; color: white; border: none; font-size: 16px; cursor: pointer; }
+    button:hover { background-color: #218838; }
+    .result { margin-top: 20px; font-size: 18px; font-weight: bold; }
+  </style>
+</head>
+<body>
+
+  <h2>簡易收銀計算機</h2>
+
+  <div class="input-group">
+    <label for="total">應收金額 ($):</label>
+    <input type="number" id="total" placeholder="請輸入應收總額">
+  </div>
+
+  <div class="input-group">
+    <label for="paid">顧客實付 ($):</label>
+    <input type="number" id="paid" placeholder="請輸入顧客給的金額">
+  </div>
+
+  <button onclick="calculateChange()">計算找零</button>
+
+  <div class="result" id="result">找零金額：$0</div>
+
+  <script>
+    function calculateChange() {
+      const total = parseFloat(document.getElementById('total').value) || 0;
+      const paid = parseFloat(document.getElementById('paid').value) || 0;
+      const resultDiv = document.getElementById('result');
+
+      if (paid < total) {
+        resultDiv.style.color = 'red';
+        resultDiv.innerText = `金額不足！還差 $${(total - paid).toFixed(2)}`;
+      } else {
+        const change = paid - total;
+        resultDiv.style.color = 'green';
+        resultDiv.innerText = `找零金額：$${change.toFixed(2)}`;
+      }
+    }
+  </script>
+
+</body>
+</html>
